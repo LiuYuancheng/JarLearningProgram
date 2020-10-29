@@ -45,8 +45,8 @@ Enter the selection:
 | 03           |                             |
 | 04           |                             |
 | 05           | Parameters and functions.   |
-| 06           |                             |
-| 07           |                             |
+| 06           | String and characters.      |
+| 07           | Program control flow.       |
 | 08           |                             |
 | 09           |                             |
 | 10           |                             |

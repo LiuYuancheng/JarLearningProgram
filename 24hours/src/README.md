@@ -37,33 +37,33 @@ java B24hours
 
 Enter the selection: 
 
-| Input number | Test case detail            |
-| ------------ | --------------------------- |
-| 00           | Stop and terminate program. |
-| 01           | Show title messages.        |
-| 02           |                             |
-| 03           |                             |
-| 04           |                             |
-| 05           | Parameters and functions.   |
-| 06           | String and characters.      |
-| 07           | Program control flow.       |
-| 08           |                             |
-| 09           |                             |
-| 10           |                             |
-| 11           |                             |
-| 12           |                             |
-| 13           |                             |
-| 14           |                             |
-| 15           |                             |
-| 16           |                             |
-| 17           |                             |
-| 18           |                             |
-| 19           |                             |
-| 20           |                             |
-| 21           |                             |
-| 22           |                             |
-| 23           |                             |
-| 24           |                             |
+| Input number | Test case detail             |
+| ------------ | ---------------------------- |
+| 00           | Stop and terminate program.  |
+| 01           | Show title messages.         |
+| 02           |                              |
+| 03           |                              |
+| 04           |                              |
+| 05           | Parameters and functions.    |
+| 06           | String and characters.       |
+| 07           | Program control flow.        |
+| 08           | Looping.                     |
+| 09           | Array and list.              |
+| 10           | Object oriented programming. |
+| 11           |                              |
+| 12           |                              |
+| 13           |                              |
+| 14           |                              |
+| 15           |                              |
+| 16           |                              |
+| 17           |                              |
+| 18           |                              |
+| 19           |                              |
+| 20           |                              |
+| 21           |                              |
+| 22           |                              |
+| 23           |                              |
+| 24           |                              |
 
 
 

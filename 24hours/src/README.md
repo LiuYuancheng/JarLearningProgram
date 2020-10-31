@@ -50,8 +50,8 @@ Enter the selection:
 | 08           | Looping.                     |
 | 09           | Array and list.              |
 | 10           | Object oriented programming. |
-| 11           |                              |
-| 12           |                              |
+| 11           | Description object.          |
+| 12           | Vector test.                 |
 | 13           |                              |
 | 14           |                              |
 | 15           |                              |

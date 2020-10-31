@@ -1,39 +1,96 @@
-import java.util.*;  // Import the Scanner class
+import java.util.*; // Import the Scanner class
+import java.awt.*;
 
 //-----------------------------------------------------------------------------
 class Modem {
+    static int modCount = 0;
     int speed;
+
+    static void countAdd() {
+        modCount++;
+    }
 
     public void displaySpd() {
         System.out.println("Speed: " + speed);
     }
 }
 
-class CableModen extends Modem{
+class CableModen extends Modem {
     String method = "cable connection";
-    public void connect(){
-        System.out.println("Connecting to the internet with " +method+".");
+
+    public void connect() {
+        System.out.println("Connecting to the internet with " + method + ".");
     }
 }
 
-class DlsModen extends Modem{
+class DlsModen extends Modem {
     String method = "PLS phone connection";
-    public void connect(){
-        System.out.println("Connecting to the internet with " +method+".");
+
+    public void connect() {
+        System.out.println("Connecting to the internet with " + method + ".");
     }
 }
 
+// -----------------------------------------------------------------------------
+class myObj {
+
+    static int objCont = 0;
+
+    public myObj() {
+        String objName = "obj";
+        objCont++;
+    }
+
+    public static int getObjCount() {
+        return objCont;
+    }
+}
 //-----------------------------------------------------------------------------
+class StringLister {
+    String[] names = { "Spanky", "Alfa", "Buckwheat" };
+
+    public StringLister(String[] moreName) {
+        Vector<String> list = new Vector<String>();
+        for (int i = 0; i < names.length; i++)
+            list.add(names[i]);
+        for (int i = 0; i < moreName.length; i++)
+            list.add(moreName[i]);
+        Collections.sort(list);
+        for (String name : list)
+            System.out.println(name);
+    }
+}
+// -----------------------------------------------------------------------------
+class Point3D extends Point {
+    public int z;
+
+    public Point3D(int x, int y, int z){
+        super(x, y);
+        this.z = z;
+    }
+
+    public void move(int x, int y, int z) {
+        this.z = z;
+        super.move(x, y);
+    }
+
+    public void translate(int x, int y, int z) {
+        this.z += z;
+        super.translate(x, y);
+    }
+}
+
+// -----------------------------------------------------------------------------
 class B24hours {
     public static void main(String[] args) {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-10), 0 for stop:");
+            System.out.println("Enter your choice(0-12), 0 for stop:");
             choice = myObj.nextInt();
             System.out.println("Input: " + choice);
-            
-            switch(choice){
+
+            switch (choice) {
                 case 0:
                     System.out.println("Program terminate...");
                     break;
@@ -58,22 +115,30 @@ class B24hours {
                 case 10:
                     section10();
                     break;
+                case 11:
+                    section11();
+                    break;
+                case 12: 
+                    section12();
+                    break;
                 default:
-                    System.out.println("The input" +choice+ "is not valid.");
+                    System.out.println("The input" + choice + "is not valid.");
             }
         }
     }
 
-    public static void section1(){
-        System.out.println(" 0: Terminate program. \n"
-        + "1:\tShow the input list. \n"
-        + "5:\tParameter define. \n"
-        + "6:\tString and characters.\n"
-        + "7:\tProgram control flow.\n"
-        + "8:\tLooping.\n"
-        + "9:\tArray and list."
-        + "10:\tObject oriented programming."
-        );
+    public static void section1() {
+        System.out.println(" 0: Terminate program. \n" 
+                    + "1:\tShow the input list. \n" 
+                    + "5:\tParameter define. \n"
+                    + "6:\tString and characters.\n" 
+                    + "7:\tProgram control flow.\n" 
+                    + "8:\tLooping.\n"
+                    + "9:\tArray and list.\n" 
+                    + "10:\tObject oriented programming.\n" 
+                    + "11.\tDescription object.\n"
+                    + "12.\tVector test."
+                    );
     }
 
     public static void section5() {
@@ -130,7 +195,7 @@ class B24hours {
         System.out.println(" numOfEnemise: \t" + numOfEnemise);
     }
 
-    public static void section8(){
+    public static void section8() {
         System.out.println("section 8: Looping.");
         int count = 10;
         Calendar start = Calendar.getInstance();
@@ -141,39 +206,71 @@ class B24hours {
 
         int nextMin = start.get(Calendar.MINUTE);
         int nextSec = start.get(Calendar.SECOND);
-        while(count < 1000000){
+        while (count < 1000000) {
             GregorianCalendar now = new GregorianCalendar();
-            if(now.get(Calendar.MINUTE)>= nextMin && now.get(Calendar.SECOND)>=nextSec) break;
-            count ++;
+            if (now.get(Calendar.MINUTE) >= nextMin && now.get(Calendar.SECOND) >= nextSec)
+                break;
+            count++;
         }
-        System.out.println("The counter added "+ count + "times");
+        System.out.println("The counter added " + count + "times");
     }
 
-    public static void section9(){
+    public static void section9() {
         System.out.println("section 9: Array and list.");
         String str = "This is a String";
         char[] charList = str.toCharArray();
-        for(int i =0; i<charList.length; i++){
-            charList[i] = (charList[i] == ' ')? '.':charList[i];
+        for (int i = 0; i < charList.length; i++) {
+            charList[i] = (charList[i] == ' ') ? '.' : charList[i];
         }
         Arrays.sort(charList);
         System.out.println("New String:" + new String(charList));
     }
 
-    public static void section10(){
+    public static void section10() {
         System.out.println("section 10: Object oriented programming.");
         String count = "25";
         int myCount = Integer.parseInt(count);
         System.out.println("The square root of 25 is " + Math.sqrt(myCount));
 
         CableModen cm = new CableModen();
+        cm.countAdd();
         DlsModen dm = new DlsModen();
+        dm.countAdd();
         cm.speed = 50000;
         dm.speed = 40000;
         cm.connect();
         cm.displaySpd();
         dm.connect();
         dm.displaySpd();
+        System.out.println("Created " + Modem.modCount + " modens.");
     }
 
+    public static void section11() {
+        System.out.println("section 11: Description object.");
+        int objnum = 5;
+        myObj[] objArr = new myObj[objnum];
+        for (int i = 0; i < objnum; i++) {
+            objArr[i] = new myObj();
+        }
+        System.out.println("Created " + myObj.getObjCount() + " object.");
+    }
+
+    public static void section12() {
+        System.out.println("section 12: Vector test.");
+        String[] names = { "name1", "name2", "name3" };
+        StringLister lister = new StringLister(names);
+
+        Point pt1 = new Point(11, 22);
+        System.out.println("pt1:(" + pt1.x + "," + pt1.y + ")");
+        Point3D pt2 = new Point3D(6, 7, 24);
+        System.out.println("pt2:(" + pt2.x + "," + pt2.y + "," + pt2.z + ")");
+        pt1.move(10, 20);
+        System.out.println("pt1:(" + pt1.x + "," + pt1.y + ")");
+        pt2.move(10, 20);
+        System.out.println("pt2:(" + pt2.x + "," + pt2.y + "," + pt2.z + ")");
+        pt1.translate(3, 3);
+        System.out.println("pt1:(" + pt1.x + "," + pt1.y + ")");
+        pt2.translate(3, 3);
+        System.out.println("pt2:(" + pt2.x + "," + pt2.y + "," + pt2.z + ")");
+    }
 }

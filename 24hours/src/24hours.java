@@ -1,5 +1,6 @@
 import java.util.*; // Import the Scanner class
 import java.awt.*;
+import javax.swing.*;
 
 //-----------------------------------------------------------------------------
 class Modem {
@@ -81,6 +82,37 @@ class Point3D extends Point {
 }
 
 // -----------------------------------------------------------------------------
+class PlaybackFm extends JFrame {
+    public PlaybackFm() {
+        super("Play back");
+        setSize(255, 80);
+        // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setVisible(true);
+        FlowLayout flo = new FlowLayout();
+        setLayout(flo);
+        add(new JButton("Play"));
+        add(new JButton("Stop"));
+        add(new JButton("Pause"));
+        setVisible(true);
+    }
+}
+// -----------------------------------------------------------------------------
+class ClockFrm extends JFrame{
+    public ClockFrm(){
+        super("Clock");
+        setSize(225, 150);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        FlowLayout flo = new FlowLayout();
+        setLayout(flo);
+        c24lockPnl clkPnl = new c24lockPnl();
+        add(clkPnl);
+        setVisible(true);
+    }
+}
+
+// -----------------------------------------------------------------------------
 class B24hours {
     public static void main(String[] args) {
         int choice = 1;
@@ -121,6 +153,9 @@ class B24hours {
                 case 12: 
                     section12();
                     break;
+                case 13: 
+                    section13();
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -128,7 +163,7 @@ class B24hours {
     }
 
     public static void section1() {
-        System.out.println(" 0: Terminate program. \n" 
+        System.out.println(" 0:\tTerminate program. \n" 
                     + "1:\tShow the input list. \n" 
                     + "5:\tParameter define. \n"
                     + "6:\tString and characters.\n" 
@@ -138,6 +173,7 @@ class B24hours {
                     + "10:\tObject oriented programming.\n" 
                     + "11.\tDescription object.\n"
                     + "12.\tVector test."
+                    + "13.\tApplication GUI."
                     );
     }
 
@@ -272,5 +308,11 @@ class B24hours {
         System.out.println("pt1:(" + pt1.x + "," + pt1.y + ")");
         pt2.translate(3, 3);
         System.out.println("pt2:(" + pt2.x + "," + pt2.y + "," + pt2.z + ")");
+    }
+
+    public static void section13(){
+        System.out.println("section 13: Application GUI.");
+        PlaybackFm pb = new PlaybackFm();
+        ClockFrm clkFm = new ClockFrm();
     }
 }

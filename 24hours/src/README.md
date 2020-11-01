@@ -52,7 +52,7 @@ Enter the selection:
 | 10           | Object oriented programming. |
 | 11           | Description object.          |
 | 12           | Vector test.                 |
-| 13           |                              |
+| 13           | Application GUI.             |
 | 14           |                              |
 | 15           |                              |
 | 16           |                              |

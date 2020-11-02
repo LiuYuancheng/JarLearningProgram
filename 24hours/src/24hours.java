@@ -118,7 +118,7 @@ class B24hours {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-12), 0 for stop:");
+            System.out.println("Enter your choice(0-14), 0 for stop:");
             choice = myObj.nextInt();
             System.out.println("Input: " + choice);
 
@@ -156,6 +156,9 @@ class B24hours {
                 case 13: 
                     section13();
                     break;
+                case 14:
+                    section14();
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -172,8 +175,9 @@ class B24hours {
                     + "9:\tArray and list.\n" 
                     + "10:\tObject oriented programming.\n" 
                     + "11.\tDescription object.\n"
-                    + "12.\tVector test."
-                    + "13.\tApplication GUI."
+                    + "12.\tVector test.\n"
+                    + "13.\tApplication GUI.\n"
+                    + "14.\tApplication layout.\n"
                     );
     }
 
@@ -314,5 +318,10 @@ class B24hours {
         System.out.println("section 13: Application GUI.");
         PlaybackFm pb = new PlaybackFm();
         ClockFrm clkFm = new ClockFrm();
+    }
+
+    public static void section14(){
+        System.out.println("section 14: Application layout.");
+        LottoMadnes frame = new LottoMadnes();
     }
 }

@@ -26,3 +26,6 @@ public class c24lockPnl extends JPanel{
         return monthList[month] + " " + day + " " + year + " " + hour + ":" + mins;
     }
 }
+
+
+

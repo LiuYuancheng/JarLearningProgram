@@ -53,7 +53,7 @@ Enter the selection:
 | 11           | Description object.          |
 | 12           | Vector test.                 |
 | 13           | Application GUI.             |
-| 14           |                              |
+| 14           | Application layout.          |
 | 15           |                              |
 | 16           |                              |
 | 17           |                              |

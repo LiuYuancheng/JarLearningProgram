@@ -1,5 +1,6 @@
 import java.util.*; // Import the Scanner class
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 //-----------------------------------------------------------------------------
@@ -112,6 +113,36 @@ class ClockFrm extends JFrame{
     }
 }
 
+class KeyView extends JFrame implements KeyListener{
+    JTextField keyTxt = new JTextField(80);
+    JLabel keyLb = new JLabel("Press any key in the text field.");
+
+    KeyView(){
+        super("KeyView");
+        setSize(350, 100);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        keyTxt.addKeyListener(this);
+        BorderLayout bord = new BorderLayout();
+        setLayout(bord);
+        add(keyLb, bord.NORTH);
+        add(keyTxt, bord.CENTER);
+        setVisible(true);
+    }
+
+    public void keyTyped(KeyEvent input){
+        char key = input.getKeyChar();
+        keyLb.setText("You pressed: " + key);
+    }
+
+    public void keyPressed(KeyEvent input){
+
+    }
+
+    public void keyReleased(KeyEvent input){
+
+    }
+}
+
 // -----------------------------------------------------------------------------
 class B24hours {
     public static void main(String[] args) {
@@ -159,6 +190,9 @@ class B24hours {
                 case 14:
                     section14();
                     break;
+                case 15:
+                    section15();
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -178,6 +212,7 @@ class B24hours {
                     + "12.\tVector test.\n"
                     + "13.\tApplication GUI.\n"
                     + "14.\tApplication layout.\n"
+                    + "15.\tUI user input listener.\n"
                     );
     }
 
@@ -323,5 +358,10 @@ class B24hours {
     public static void section14(){
         System.out.println("section 14: Application layout.");
         LottoMadnes frame = new LottoMadnes();
+    }
+
+    public static void section15(){
+        System.out.println("section 15: UI user input listener.");
+        KeyView kv = new KeyView();
     }
 }

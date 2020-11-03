@@ -1,7 +1,109 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
+
+class LottoEvent implements ItemListener, ActionListener, Runnable{
+    LottoMadnes gui;
+    Thread playing;
+    public LottoEvent(LottoMadnes gui){
+        this.gui = gui;
+    }
+
+    public void actionPerformed(ActionEvent event){
+        switch(event.getActionCommand()){
+            case "Play" :
+                startPlaying();
+                break;
+            case "Reset":
+                resetPlaying();
+                break;
+            case "Stop":
+                stopPlaying();
+            default:
+                System.out.println("The event is not avaliable.");
+        }
+
+    }
+
+    void startPlaying(){
+        playing = new Thread();
+        playing.start();
+        gui.play.setEnabled(false);
+        gui.stop.setEnabled(true);
+        gui.reset.setEnabled(false);
+        gui.quickpick.setEnabled(false);
+        gui.personal.setEnabled(false);
+    }
+
+    void stopPlaying(){
+        playing = null;
+        gui.play.setEnabled(true);
+        gui.stop.setEnabled(false);
+        gui.reset.setEnabled(true);
+        gui.quickpick.setEnabled(true);
+        gui.personal.setEnabled(true);
+    }
+
+    void resetPlaying() {
+        for (int i = 0; i < 6; i++) {
+            gui.numbers[i].setText(null);
+            gui.winners[i].setText(null);
+        }
+        gui.got3Tf.setText("0");
+        gui.got4Tf.setText("0");
+        gui.got5Tf.setText("0");
+        gui.got6Tf.setText("0");
+        gui.drawTf.setText("0");
+        gui.yearTf.setText("0");
+    }
+
+    void addOneToField(JTextField field) {
+        int num = Integer.parseInt("0" + field.getText());
+        num++;
+        field.setText("" + num);
+    }
+
+    boolean numberGone(int num, JTextField[] pastNums, int count) {
+        for (int i = 0; i < count; i++) {
+            if (Integer.parseInt(pastNums[i].getText()) == num)
+                return true;
+        }
+        return false;
+    }
+
+    boolean matchedOne(JTextField win, JTextField[] allPicks){
+        for (int i = 0; i < 6; i++){
+            String winText = win.getText();
+            if(winText.equals(allPicks[i].getText()))
+                return true;
+        }
+        return false;
+    }
+
+    public void itemStateChanged(ItemEvent event) {
+        Object item = event.getItem();
+        if (item == gui.quickpick) {
+            for (int i = 0; i < 6; i++) {
+                int pick;
+                do {
+                    pick = (int) Math.floor(Math.random() * 50 + 1);
+                } while (numberGone(pick, gui.numbers, i));
+                gui.numbers[i].setText("" + pick);
+            }
+        } else {
+            for (int i = 0; i < 6; i++) {
+                gui.numbers[i].setText(null);
+            }
+        }
+    }
+
+    public void run(){
+        Thread thisThread = Thread.currentThread();
+        
+    }
+}
 
 public class LottoMadnes extends JFrame {
 
@@ -18,7 +120,7 @@ public class LottoMadnes extends JFrame {
 
     JPanel row3 = new JPanel();
     JButton play = new JButton("Play");
-    JButton pause = new JButton("Pause");
+    JButton reset = new JButton("Reset");
     JButton stop = new JButton("Stop");
 
     JPanel row4 = new JPanel();
@@ -70,7 +172,7 @@ public class LottoMadnes extends JFrame {
         FlowLayout layout3 = new FlowLayout(FlowLayout.CENTER, 10, 10);
         row3.setLayout(layout3);
         row3.add(play);
-        row3.add(pause);
+        row3.add(reset);
         row3.add(stop);
         add(row3);
 

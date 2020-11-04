@@ -54,7 +54,7 @@ Enter the selection:
 | 12           | Vector test.                 |
 | 13           | Application GUI.             |
 | 14           | Application layout.          |
-| 15           |                              |
+| 15           | UI user input listener.      |
 | 16           |                              |
 | 17           |                              |
 | 18           |                              |

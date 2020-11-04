@@ -149,7 +149,7 @@ class B24hours {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-14), 0 for stop:");
+            System.out.println("Enter your choice(0-15), 0 for stop:");
             choice = myObj.nextInt();
             System.out.println("Input: " + choice);
 
@@ -363,5 +363,6 @@ class B24hours {
     public static void section15(){
         System.out.println("section 15: UI user input listener.");
         KeyView kv = new KeyView();
+        LottoMadnes frame = new LottoMadnes();
     }
 }

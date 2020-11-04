@@ -12,7 +12,8 @@ class LottoEvent implements ItemListener, ActionListener, Runnable{
     }
 
     public void actionPerformed(ActionEvent event){
-        switch(event.getActionCommand()){
+        String evtCmd = event.getActionCommand();
+        switch(evtCmd){
             case "Play" :
                 startPlaying();
                 break;
@@ -21,14 +22,15 @@ class LottoEvent implements ItemListener, ActionListener, Runnable{
                 break;
             case "Stop":
                 stopPlaying();
+                break;
             default:
-                System.out.println("The event is not avaliable.");
+                System.out.println("The event ["+evtCmd+"] is not avaliable.");
         }
 
     }
 
     void startPlaying(){
-        playing = new Thread();
+        playing = new Thread(this);
         playing.start();
         gui.play.setEnabled(false);
         gui.stop.setEnabled(true);
@@ -73,10 +75,10 @@ class LottoEvent implements ItemListener, ActionListener, Runnable{
         return false;
     }
 
-    boolean matchedOne(JTextField win, JTextField[] allPicks){
-        for (int i = 0; i < 6; i++){
+    boolean matchedOne(JTextField win, JTextField[] allPicks) {
+        for (int i = 0; i < 6; i++) {
             String winText = win.getText();
-            if(winText.equals(allPicks[i].getText()))
+            if (winText.equals(allPicks[i].getText()))
                 return true;
         }
         return false;
@@ -99,13 +101,53 @@ class LottoEvent implements ItemListener, ActionListener, Runnable{
         }
     }
 
-    public void run(){
+    public void run() {
         Thread thisThread = Thread.currentThread();
-        
+        while (playing == thisThread) {
+            addOneToField(gui.drawTf);
+            int draw = Integer.parseInt(gui.drawTf.getText());
+            gui.yearTf.setText("" + (float) draw / 104);
+
+            int matches = 0;
+            for (int i = 0; i < 6; i++) {
+                int ball;
+                do {
+                    ball = (int) Math.floor(Math.random() * 50 + 1);
+                } while (numberGone(ball, gui.winners, i));
+                gui.winners[i].setText("" + ball);
+                if (matchedOne(gui.winners[i], gui.numbers))
+                    matches++;
+            }
+            switch (matches) {
+                case 3:
+                    addOneToField(gui.got3Tf);
+                    break;
+                case 4:
+                    addOneToField(gui.got4Tf);
+                    break;
+                case 5:
+                    addOneToField(gui.got5Tf);
+                    break;
+                case 6:
+                    addOneToField(gui.got6Tf);
+                    gui.stop.setEnabled(false);
+                    gui.play.setEnabled(true);
+                    playing = null;
+                    break;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                System.out.println("" + e);
+            }
+        }
     }
 }
 
 public class LottoMadnes extends JFrame {
+
+    // Add the event listener
+    LottoEvent lotto = new LottoEvent(this);
 
     JPanel row1 = new JPanel();
     ButtonGroup option = new ButtonGroup();
@@ -143,7 +185,14 @@ public class LottoMadnes extends JFrame {
         setSize(550, 270);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         GridLayout layout = new GridLayout(5, 1, 10, 10);
+        setBackground(new Color(200,210,200));
         setLayout(layout);
+
+        quickpick.addItemListener(lotto);
+        personal.addItemListener(lotto);
+        play.addActionListener(lotto);
+        stop.addActionListener(lotto);
+        reset.addActionListener(lotto);
 
         FlowLayout layout1 = new FlowLayout(FlowLayout.CENTER, 10, 10);
         option.add(quickpick);
@@ -203,6 +252,8 @@ public class LottoMadnes extends JFrame {
         got3Tf.setEditable(false);
         row4.add(yearTf);
         
+        add(row4);
+
         setVisible(true);
     }
 }

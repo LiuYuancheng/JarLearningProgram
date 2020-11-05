@@ -113,6 +113,7 @@ class ClockFrm extends JFrame{
     }
 }
 
+// -----------------------------------------------------------------------------
 class KeyView extends JFrame implements KeyListener{
     JTextField keyTxt = new JTextField(80);
     JLabel keyLb = new JLabel("Press any key in the text field.");
@@ -135,11 +136,58 @@ class KeyView extends JFrame implements KeyListener{
     }
 
     public void keyPressed(KeyEvent input){
-
+        // no thing to do.
     }
 
     public void keyReleased(KeyEvent input){
+        // no thing to do.
+    }
+}
+// -----------------------------------------------------------------------------
+class WriteMail extends JFrame{
 
+    public WriteMail(){
+        super("Write an E-mail");
+        setSize(370, 270);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // FlowLayout flo = new FlowLayout(FlowLayout.RIGHT);
+        setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        JPanel row1 = new JPanel();
+        row1.add(new JLabel("To:"));
+        JTextField to = new JTextField(24);
+        row1.add(to);
+        add(row1);
+
+        JPanel row2 = new JPanel();
+        row2.add(new JLabel("Subject:"));
+        JTextField subject = new JTextField(24);
+        row2.add(subject);
+        add(row2);
+
+        JPanel row3 = new JPanel();
+        row3.add(new JLabel("Message:"));
+        JTextArea message = new JTextArea(4, 24);
+        message.setLineWrap(true);
+        message.setWrapStyleWord(true);
+        JScrollPane scroll = new JScrollPane(message, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        row3.add(message);
+        add(row3);
+
+        JPanel row4 = new JPanel();
+        JButton send = new JButton("Send");
+        JSlider pct = new JSlider(JSlider.HORIZONTAL, 1, 10, 2);
+        pct.setMajorTickSpacing(1);
+        pct.setMinorTickSpacing(1);
+        pct.setPaintTicks(true);
+        pct.setPaintLabels(true);
+
+        row4.add(pct);
+        row4.add(send);
+        add(row4);
+
+        setVisible(true);
     }
 }
 
@@ -185,13 +233,16 @@ class B24hours {
                     section12();
                     break;
                 case 13: 
-                    section13();
+                    section13(myObj);
                     break;
                 case 14:
                     section14();
                     break;
                 case 15:
-                    section15();
+                    section15(myObj);
+                    break;
+                case 16:
+                    section16(myObj);
                     break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
@@ -213,6 +264,7 @@ class B24hours {
                     + "13.\tApplication GUI.\n"
                     + "14.\tApplication layout.\n"
                     + "15.\tUI user input listener.\n"
+                    + "16.\tCreate complex UI."
                     );
     }
 
@@ -349,10 +401,23 @@ class B24hours {
         System.out.println("pt2:(" + pt2.x + "," + pt2.y + "," + pt2.z + ")");
     }
 
-    public static void section13(){
+    public static void section13(Scanner myObj){
         System.out.println("section 13: Application GUI.");
-        PlaybackFm pb = new PlaybackFm();
-        ClockFrm clkFm = new ClockFrm();
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" + "1.\t Playback UI. \n" + "2.\t Clock UI.");
+        int choice = myObj.nextInt();
+        System.out.println("Input: " + choice);
+        switch (choice) {
+            case 0:
+                break;
+            case 1:
+                PlaybackFm pb = new PlaybackFm();
+                break;
+            case 2:
+                ClockFrm clkFm = new ClockFrm();
+                break;
+            default:
+                System.out.println("The input" + choice + "is not valid.");
+        }
     }
 
     public static void section14(){
@@ -360,9 +425,50 @@ class B24hours {
         LottoMadnes frame = new LottoMadnes();
     }
 
-    public static void section15(){
+    public static void section15(Scanner myObj) {
         System.out.println("section 15: UI user input listener.");
-        KeyView kv = new KeyView();
-        LottoMadnes frame = new LottoMadnes();
+
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
+            + "1.\t KeyView press UI. \n" 
+            + "2.\t LottoMadnes UI.");
+        int choice = myObj.nextInt();
+        System.out.println("Input: " + choice);
+
+        switch (choice) {
+            case 0:
+                break;
+            case 1:
+                KeyView kv = new KeyView();
+                break;
+            case 2:
+                LottoMadnes frame = new LottoMadnes();
+                break;
+            default:
+                System.out.println("The input" + choice + "is not valid.");
+        }
+    }
+
+    public static void section16(Scanner myObj){
+        //Create complex UI
+        System.out.println("section 16: Create complex UI.");
+
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
+                + "1.\t Email editor UI. \n" 
+                + "2.\t LottoMadnes UI.");
+        int choice = myObj.nextInt();
+        System.out.println("Input: " + choice);
+
+        switch (choice) {
+            case 0:
+                break;
+            case 1:
+                WriteMail email = new WriteMail();
+                break;
+            case 2:
+                LottoMadnes frame = new LottoMadnes();
+                break;
+            default:
+                System.out.println("The input" + choice + "is not valid.");
+        }
     }
 }

@@ -57,7 +57,7 @@ Enter the selection:
 | 15           | UI user input listener.      |
 | 16           | Create complex UI            |
 | 17           |                              |
-| 18           |                              |
+| 18           | Exception handling.          |
 | 19           |                              |
 | 20           |                              |
 | 21           |                              |

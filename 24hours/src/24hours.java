@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.net.*;
 
 //-----------------------------------------------------------------------------
 class Modem {
@@ -277,19 +278,19 @@ class ColorSlider extends JFrame implements ChangeListener {
         if (src.getValueIsAdjusting() != true) {
             Color crtColor = new Color(red.getValue(), green.getValue(), blue.getValue());
             canves.changeColor(crtColor);
-            //System.out.print("repaint the panel.");
+            // System.out.print("repaint the panel.");
             canves.repaint();
         }
     }
 
-    public Insets getInsets(){
+    public Insets getInsets() {
         return new Insets(45, 10, 10, 10);
     }
 }
 
 // -----------------------------------------------------------------------------
-class Tool extends JFrame{
-    public Tool(){
+class Tool extends JFrame {
+    public Tool() {
         super("Tool");
         setSize(270, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -314,7 +315,7 @@ class Tool extends JFrame{
         JTextArea edit = new JTextArea(8, 40);
         JScrollPane scoll = new JScrollPane();
 
-        BorderLayout border = new BorderLayout(); 
+        BorderLayout border = new BorderLayout();
         setLayout(border);
         add("North", bar);
         add("Center", scoll);
@@ -324,15 +325,48 @@ class Tool extends JFrame{
 }
 
 // -----------------------------------------------------------------------------
+class HomePage {
+    String owner;
+    URL address;
+    String category = "none";
+
+    public HomePage(String inOwner, String inAddr) throws MalformedURLException {
+        owner = inOwner;
+        address = new URL(inAddr);
+    }
+
+    public HomePage(String inOwner, String inAddr, String category) throws MalformedURLException {
+        this(inOwner, inAddr);
+        this.category = category;
+    }
+}
+// -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class B24hours {
     public static void main(String[] args) {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-16), 0 for stop:");
-            choice = myObj.nextInt();
-            System.out.println("Input: " + choice);
+            System.out.println("Enter your choice(0-18), 0 for stop:");
+            //choice = myObj.nextInt();
+            String choiceStr = myObj.nextLine();
+            //System.out.println("Input: " + choice);
+            choiceStr = choiceStr.replace("\n", "");
+            try{
+                choice = Integer.parseInt(choiceStr);
+            }catch(NumberFormatException e){
+                System.out.println("The input must be a number. ");
+                choice = 1;
+                continue;
+            }catch(Exception e)
+            {
+                System.out.println("Exception:"+e.toString());
+                choice = 1;
+                continue;
+            }
+            finally{
+                System.out.println("Input: " + choice);
+            }
 
             switch (choice) {
                 case 0:
@@ -377,6 +411,9 @@ class B24hours {
                 case 16:
                     section16(myObj);
                     break;
+                case 18:
+                    section18();
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -397,7 +434,8 @@ class B24hours {
                     + "13.\tApplication GUI.\n"
                     + "14.\tApplication layout.\n"
                     + "15.\tUI user input listener.\n"
-                    + "16.\tCreate complex UI."
+                    + "16.\tCreate complex UI.\n"
+                    + "18.\tException handling.\n"
                     );
     }
 
@@ -606,6 +644,25 @@ class B24hours {
                 break;
             default:
                 System.out.println("The input" + choice + "is not valid.");
+        }
+    }
+
+    public static void section18() {
+        // Exception handling.
+        System.out.println("section 18: Exception handling.");
+        HomePage[] catalog = new HomePage[5];
+        try {
+            catalog[0] = new HomePage("Mark Evanier", "http://www.newfromme.com", "comic books");
+            catalog[1] = new HomePage("Todd Smith", "http://www.sharkbitten.com", "music");
+            catalog[2] = new HomePage("Rogers Cadenhead", "http://www.Cadenhead.org/workbench", "programming");
+            catalog[3] = new HomePage("Mark Evanier", "http://www.baidu1.com", "comic books");
+            catalog[4] = new HomePage("Mark Evanier", "https://www.google1.com", "comic books");
+
+            for (int i = 0; i < catalog.length; i++) {
+                System.out.println(catalog[i].owner + ":" + catalog[i].address + ":" + catalog[i].category);
+            }
+        } catch (MalformedURLException e) {
+            System.out.println("Error" + e.getMessage());
         }
     }
 }

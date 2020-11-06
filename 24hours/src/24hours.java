@@ -2,6 +2,7 @@ import java.util.*; // Import the Scanner class
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 //-----------------------------------------------------------------------------
 class Modem {
@@ -192,12 +193,144 @@ class WriteMail extends JFrame{
 }
 
 // -----------------------------------------------------------------------------
+class ColorPanel extends JPanel {
+    Color background;
+
+    ColorPanel() {
+        super();
+        setSize(270, 30);
+        background = Color.red;
+    }
+
+    public void paintComponent(Graphics comp) {
+        //System.out.print("-Paint the panel.");
+        Graphics2D comp2D = (Graphics2D) comp;
+        comp2D.setColor(background);
+        comp2D.fillRect(0, 0, getSize().width, getSize().height);
+    }
+
+    public void changeColor(Color newBg) {
+        this.background = newBg;
+    }
+}
+
+class ColorSlider extends JFrame implements ChangeListener {
+    ColorPanel canves = new ColorPanel();
+    JSlider red = new JSlider(0, 255, 255);
+    JSlider green = new JSlider(0, 255, 0);
+    JSlider blue = new JSlider(0, 255, 0);
+
+    public ColorSlider() {
+        super("Color slider");
+        setSize(270, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // FlowLayout flo = new FlowLayout(FlowLayout.RIGHT);
+        setVisible(true);
+
+        red.setMajorTickSpacing(50);
+        red.setMinorTickSpacing(10);
+        red.setPaintTicks(true);
+        red.setPaintLabels(true);
+        red.addChangeListener(this);
+
+        green.setMajorTickSpacing(50);
+        green.setMinorTickSpacing(10);
+        green.setPaintTicks(true);
+        green.setPaintLabels(true);
+        green.addChangeListener(this);
+
+        blue.setMajorTickSpacing(50);
+        blue.setMinorTickSpacing(10);
+        blue.setPaintTicks(true);
+        blue.setPaintLabels(true);
+        blue.addChangeListener(this);
+
+        setLayout(new GridLayout(4, 1));
+        FlowLayout flo = new FlowLayout(FlowLayout.RIGHT);
+
+        JPanel redPnl = new JPanel();
+        redPnl.setLayout(flo);
+        redPnl.add(new JLabel("Red: "));
+        redPnl.add(red);
+        add(redPnl);
+
+        JPanel greenPnl = new JPanel();
+        greenPnl.setLayout(flo);
+        greenPnl.add(new JLabel("Green: "));
+        greenPnl.add(green);
+        add(greenPnl);
+
+        JPanel bluePnl = new JPanel();
+        bluePnl.setLayout(flo);
+        bluePnl.add(new JLabel("Blue: "));
+        bluePnl.add(blue);
+        add(bluePnl);
+
+        add(canves);
+        canves.repaint();
+        // setLayout(new FlowLayout(FlowLayout.RIGHT));
+        setVisible(true);
+    }
+
+    public void stateChanged(ChangeEvent evt) {
+        JSlider src = (JSlider) evt.getSource();
+        if (src.getValueIsAdjusting() != true) {
+            Color crtColor = new Color(red.getValue(), green.getValue(), blue.getValue());
+            canves.changeColor(crtColor);
+            //System.out.print("repaint the panel.");
+            canves.repaint();
+        }
+    }
+
+    public Insets getInsets(){
+        return new Insets(45, 10, 10, 10);
+    }
+}
+
+// -----------------------------------------------------------------------------
+class Tool extends JFrame{
+    public Tool(){
+        super("Tool");
+        setSize(270, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JMenuBar jmb = new JMenuBar();
+        JMenu m1 = new JMenu("Start");
+        m1.add(new JMenuItem("Item 1"));
+        m1.add(new JMenuItem("Item 2"));
+        m1.addSeparator();
+        m1.add(new JMenuItem("Item 3"));
+        m1.add(new JMenuItem("Item 4"));
+        jmb.add(m1);
+
+        JButton bt1 = new JButton(new ImageIcon("img/word.gif"));
+        JButton bt2 = new JButton(new ImageIcon("img/excel.gif"));
+        JButton bt3 = new JButton(new ImageIcon("img/ppt.gif"));
+
+        JToolBar bar = new JToolBar();
+        bar.add(bt1);
+        bar.add(bt2);
+        bar.add(bt3);
+
+        JTextArea edit = new JTextArea(8, 40);
+        JScrollPane scoll = new JScrollPane();
+
+        BorderLayout border = new BorderLayout(); 
+        setLayout(border);
+        add("North", bar);
+        add("Center", scoll);
+        setVisible(true);
+    }
+
+}
+
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 class B24hours {
     public static void main(String[] args) {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-15), 0 for stop:");
+            System.out.println("Enter your choice(0-16), 0 for stop:");
             choice = myObj.nextInt();
             System.out.println("Input: " + choice);
 
@@ -454,7 +587,8 @@ class B24hours {
 
         System.out.println("Enter your choice(0-3), 0 for stop:\n" 
                 + "1.\t Email editor UI. \n" 
-                + "2.\t LottoMadnes UI.");
+                + "2.\t Color change UI.\n"
+                + "3.\t Tool UI.");
         int choice = myObj.nextInt();
         System.out.println("Input: " + choice);
 
@@ -465,7 +599,10 @@ class B24hours {
                 WriteMail email = new WriteMail();
                 break;
             case 2:
-                LottoMadnes frame = new LottoMadnes();
+                ColorSlider frame = new ColorSlider();
+                break;
+            case 3: 
+                Tool toolframe = new Tool();
                 break;
             default:
                 System.out.println("The input" + choice + "is not valid.");

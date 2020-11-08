@@ -414,6 +414,9 @@ class B24hours {
                 case 18:
                     section18();
                     break;
+                case 19:
+                    section19();
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -436,6 +439,7 @@ class B24hours {
                     + "15.\tUI user input listener.\n"
                     + "16.\tCreate complex UI.\n"
                     + "18.\tException handling.\n"
+                    + "19.\tMulti-Threading program.\n"
                     );
     }
 
@@ -664,5 +668,10 @@ class B24hours {
         } catch (MalformedURLException e) {
             System.out.println("Error" + e.getMessage());
         }
+    }
+
+    public static void section19(){
+        System.out.println("section 19: Multi-Threading program.");
+        FindPrimes fp = new FindPrimes();
     }
 }

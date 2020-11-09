@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.net.*;
+import java.io.*;
 
 //-----------------------------------------------------------------------------
 class Modem {
@@ -347,7 +348,7 @@ class B24hours {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-18), 0 for stop:");
+            System.out.println("Enter your choice(0-20), 0 for stop:");
             //choice = myObj.nextInt();
             String choiceStr = myObj.nextLine();
             //System.out.println("Input: " + choice);
@@ -417,6 +418,9 @@ class B24hours {
                 case 19:
                     section19();
                     break;
+                case 20:
+                    section20(myObj);
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -440,6 +444,7 @@ class B24hours {
                     + "16.\tCreate complex UI.\n"
                     + "18.\tException handling.\n"
                     + "19.\tMulti-Threading program.\n"
+                    + "20.\tFile IO."
                     );
     }
 
@@ -673,5 +678,75 @@ class B24hours {
     public static void section19(){
         System.out.println("section 19: Multi-Threading program.");
         FindPrimes fp = new FindPrimes();
+    }
+
+    public static void section20(Scanner myObj){
+        System.out.println("section 20: File IO.");
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
+                + "1.\t MP3 input. \n"
+                + "2.\t System in.\n" 
+                + "3.\t Tool UI.");
+        int choice = myObj.nextInt();
+        System.out.println("Input: " + choice);
+
+        switch (choice) {
+            case 0:
+                break;
+            case 1:
+                mp3reader("img/file_example_MP3_700KB.mp3");
+                break;
+            case 2:
+                readConsole();
+                break;
+            case 3:
+                Tool toolframe = new Tool();
+                break;
+            default:
+                System.out.println("The input" + choice + "is not valid.");
+        }
+    }
+
+    public static void mp3reader(String fileName) {
+        try {
+            File song = new File(fileName);
+            FileInputStream file = new FileInputStream(song);
+            int size = (int) song.length();
+            file.skip(size - 128);
+            byte[] last128 = new byte[128];
+            file.read(last128);
+            String id3 = new String(last128);
+            String tag = id3.substring(0, 3);
+            if (tag.equals("TAG")) {
+                System.out.println("Title:" + id3.substring(3, 32) + "\n" + "Artist:" + id3.substring(33, 62) + "\n"
+                        + "Album:" + id3.substring(63, 91) + "\n" + "Year:" + id3.substring(93, 97));
+            } else {
+                System.out.println("File" + fileName + "doesn't contain ID3 inforamtion.");
+            }
+            file.close();
+        } catch (Exception err) {
+            System.out.print("Error: " + err.toString());
+        }
+    }
+
+    public static void readConsole() {
+        StringBuffer response = new StringBuffer();
+        try {
+            BufferedInputStream bin = new BufferedInputStream(System.in);
+            int in = 0;
+            char inChar;
+            do {
+                in = bin.read();
+                inChar = (char) in;
+                if (in != -1)
+                    response.append(in);
+                    System.out.println(">>");
+            } while ((in != -1) & (inChar != '\n'));
+            bin.close();
+            System.out.print(">" + bin);
+            return;
+        } catch (Exception err) {
+            System.out.print("Error: " + err.toString());
+            return;
+        }
     }
 }

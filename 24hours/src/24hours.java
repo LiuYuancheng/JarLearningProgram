@@ -50,7 +50,8 @@ class myObj {
         return objCont;
     }
 }
-//-----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
 class StringLister {
     String[] names = { "Spanky", "Alfa", "Buckwheat" };
 
@@ -65,11 +66,12 @@ class StringLister {
             System.out.println(name);
     }
 }
+
 // -----------------------------------------------------------------------------
 class Point3D extends Point {
     public int z;
 
-    public Point3D(int x, int y, int z){
+    public Point3D(int x, int y, int z) {
         super(x, y);
         this.z = z;
     }
@@ -102,9 +104,10 @@ class PlaybackFm extends JFrame {
         setVisible(true);
     }
 }
+
 // -----------------------------------------------------------------------------
-class ClockFrm extends JFrame{
-    public ClockFrm(){
+class ClockFrm extends JFrame {
+    public ClockFrm() {
         super("Clock");
         setSize(225, 150);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -117,11 +120,11 @@ class ClockFrm extends JFrame{
 }
 
 // -----------------------------------------------------------------------------
-class KeyView extends JFrame implements KeyListener{
+class KeyView extends JFrame implements KeyListener {
     JTextField keyTxt = new JTextField(80);
     JLabel keyLb = new JLabel("Press any key in the text field.");
 
-    KeyView(){
+    KeyView() {
         super("KeyView");
         setSize(350, 100);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -133,23 +136,24 @@ class KeyView extends JFrame implements KeyListener{
         setVisible(true);
     }
 
-    public void keyTyped(KeyEvent input){
+    public void keyTyped(KeyEvent input) {
         char key = input.getKeyChar();
         keyLb.setText("You pressed: " + key);
     }
 
-    public void keyPressed(KeyEvent input){
+    public void keyPressed(KeyEvent input) {
         // no thing to do.
     }
 
-    public void keyReleased(KeyEvent input){
+    public void keyReleased(KeyEvent input) {
         // no thing to do.
     }
 }
-// -----------------------------------------------------------------------------
-class WriteMail extends JFrame{
 
-    public WriteMail(){
+// -----------------------------------------------------------------------------
+class WriteMail extends JFrame {
+
+    public WriteMail() {
         super("Write an E-mail");
         setSize(370, 270);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -205,7 +209,7 @@ class ColorPanel extends JPanel {
     }
 
     public void paintComponent(Graphics comp) {
-        //System.out.print("-Paint the panel.");
+        // System.out.print("-Paint the panel.");
         Graphics2D comp2D = (Graphics2D) comp;
         comp2D.setColor(background);
         comp2D.fillRect(0, 0, getSize().width, getSize().height);
@@ -341,6 +345,71 @@ class HomePage {
         this.category = category;
     }
 }
+
+// -----------------------------------------------------------------------------
+class TagCleaner {
+    public TagCleaner(String filename) {
+        try {
+            // Load the properity:
+            File propFile = new File("CleanTag.properties");
+            FileInputStream propStream = new FileInputStream(propFile);
+            Properties props = new Properties();
+            props.load(propStream);
+            String caseProp = props.getProperty("case");
+            String hideProp = props.getProperty("hideOutput");
+            // load the html file:
+            File file = new File(filename);
+            FileInputStream in = new FileInputStream(file);
+            File clean = new File(filename + ".clean");
+            FileOutputStream out = new FileOutputStream(clean);
+            boolean eof = false;
+            boolean inTag = false;
+            boolean inQuote = false;
+            if (hideProp.equals("false")) {
+                System.out.println("Creating file ...");
+            }
+            while (!eof) {
+                int input = in.read();
+                if (input == -1) {
+                    eof = true;
+                    continue;
+                }
+
+                if (input == '"') {
+                    inQuote = !inQuote;
+                }
+
+                if (input == '<')
+                    inTag = true;
+
+                if (input == '>') {
+                    inTag = inQuote = false;
+                }
+
+                if ((!inTag) | (inQuote)) {
+                    out.write((char) input);
+                } else {
+                    if (caseProp.equals("lower")) {
+                        out.write(Character.toLowerCase((char) input));
+                    } else {
+                        out.write(Character.toUpperCase((char) input));
+                    }
+                }
+            }
+            in.close();
+            out.close();
+            if (hideProp.equals("fase")) {
+                System.out.println("Finished!");
+            }
+
+        } catch (Exception err) {
+            System.out.print("Error: " + err.toString());
+            return;
+        }
+
+    }
+}
+
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class B24hours {
@@ -349,23 +418,21 @@ class B24hours {
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
             System.out.println("Enter your choice(0-20), 0 for stop:");
-            //choice = myObj.nextInt();
+            // choice = myObj.nextInt();
             String choiceStr = myObj.nextLine();
-            //System.out.println("Input: " + choice);
+            // System.out.println("Input: " + choice);
             choiceStr = choiceStr.replace("\n", "");
-            try{
+            try {
                 choice = Integer.parseInt(choiceStr);
-            }catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("The input must be a number. ");
                 choice = 1;
                 continue;
-            }catch(Exception e)
-            {
-                System.out.println("Exception:"+e.toString());
+            } catch (Exception e) {
+                System.out.println("Exception:" + e.toString());
                 choice = 1;
                 continue;
-            }
-            finally{
+            } finally {
                 System.out.println("Input: " + choice);
             }
 
@@ -397,10 +464,10 @@ class B24hours {
                 case 11:
                     section11();
                     break;
-                case 12: 
+                case 12:
                     section12();
                     break;
-                case 13: 
+                case 13:
                     section13(myObj);
                     break;
                 case 14:
@@ -428,24 +495,12 @@ class B24hours {
     }
 
     public static void section1() {
-        System.out.println(" 0:\tTerminate program. \n" 
-                    + "1:\tShow the input list. \n" 
-                    + "5:\tParameter define. \n"
-                    + "6:\tString and characters.\n" 
-                    + "7:\tProgram control flow.\n" 
-                    + "8:\tLooping.\n"
-                    + "9:\tArray and list.\n" 
-                    + "10:\tObject oriented programming.\n" 
-                    + "11.\tDescription object.\n"
-                    + "12.\tVector test.\n"
-                    + "13.\tApplication GUI.\n"
-                    + "14.\tApplication layout.\n"
-                    + "15.\tUI user input listener.\n"
-                    + "16.\tCreate complex UI.\n"
-                    + "18.\tException handling.\n"
-                    + "19.\tMulti-Threading program.\n"
-                    + "20.\tFile IO."
-                    );
+        System.out.println(" 0:\tTerminate program. \n" + " 1:\tShow the input list. \n" + " 5:\tParameter define. \n"
+                + " 6:\tString and characters.\n" + " 7:\tProgram control flow.\n" + " 8:\tLooping.\n"
+                + " 9:\tArray and list.\n" + "10:\tObject oriented programming.\n" + "11.\tDescription object.\n"
+                + "12.\tVector test.\n" + "13.\tApplication GUI.\n" + "14.\tApplication layout.\n"
+                + "15.\tUI user input listener.\n" + "16.\tCreate complex UI.\n" + "18.\tException handling.\n"
+                + "19.\tMulti-Threading program.\n" + "20.\tFile IO.");
     }
 
     public static void section5() {
@@ -581,7 +636,7 @@ class B24hours {
         System.out.println("pt2:(" + pt2.x + "," + pt2.y + "," + pt2.z + ")");
     }
 
-    public static void section13(Scanner myObj){
+    public static void section13(Scanner myObj) {
         System.out.println("section 13: Application GUI.");
         System.out.println("Enter your choice(0-3), 0 for stop:\n" + "1.\t Playback UI. \n" + "2.\t Clock UI.");
         int choice = myObj.nextInt();
@@ -600,7 +655,7 @@ class B24hours {
         }
     }
 
-    public static void section14(){
+    public static void section14() {
         System.out.println("section 14: Application layout.");
         LottoMadnes frame = new LottoMadnes();
     }
@@ -608,9 +663,8 @@ class B24hours {
     public static void section15(Scanner myObj) {
         System.out.println("section 15: UI user input listener.");
 
-        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
-            + "1.\t KeyView press UI. \n" 
-            + "2.\t LottoMadnes UI.");
+        System.out.println(
+                "Enter your choice(0-3), 0 for stop:\n" + "1.\t KeyView press UI. \n" + "2.\t LottoMadnes UI.");
         int choice = myObj.nextInt();
         System.out.println("Input: " + choice);
 
@@ -628,14 +682,12 @@ class B24hours {
         }
     }
 
-    public static void section16(Scanner myObj){
-        //Create complex UI
+    public static void section16(Scanner myObj) {
+        // Create complex UI
         System.out.println("section 16: Create complex UI.");
 
-        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
-                + "1.\t Email editor UI. \n" 
-                + "2.\t Color change UI.\n"
-                + "3.\t Tool UI.");
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" + "1.\t Email editor UI. \n"
+                + "2.\t Color change UI.\n" + "3.\t Tool UI.");
         int choice = myObj.nextInt();
         System.out.println("Input: " + choice);
 
@@ -648,7 +700,7 @@ class B24hours {
             case 2:
                 ColorSlider frame = new ColorSlider();
                 break;
-            case 3: 
+            case 3:
                 Tool toolframe = new Tool();
                 break;
             default:
@@ -675,17 +727,15 @@ class B24hours {
         }
     }
 
-    public static void section19(){
+    public static void section19() {
         System.out.println("section 19: Multi-Threading program.");
         FindPrimes fp = new FindPrimes();
     }
 
-    public static void section20(Scanner myObj){
+    public static void section20(Scanner myObj) {
         System.out.println("section 20: File IO.");
-        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
-                + "1.\t MP3 input. \n"
-                + "2.\t System in.\n" 
-                + "3.\t Tool UI.");
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" + "1.\t MP3 input. \n" + "2.\t System in.\n"
+                + "3.\t Load file property.\n" + "4.\t Convert HTML file's Tag (U->L or L-U).\n");
         int choice = myObj.nextInt();
         System.out.println("Input: " + choice);
 
@@ -699,11 +749,29 @@ class B24hours {
                 readConsole();
                 break;
             case 3:
-                Tool toolframe = new Tool();
+                loadPt("CleanTag.properties");
                 break;
+            case 4: 
+                TagCleaner cleanner = new TagCleaner("CleanTagtest.html");
+                break;
+
             default:
                 System.out.println("The input" + choice + "is not valid.");
         }
+    }
+
+    public static void loadPt(String fileName) {
+        try {
+            FileInputStream configF = new FileInputStream(new File(fileName));
+            Properties config = new Properties();
+            config.load(configF);
+
+            String username = config.getProperty("case");
+            System.out.println("case:" + username);
+        } catch (Exception err) {
+            System.out.print("Error: " + err.toString());
+        }
+
     }
 
     public static void mp3reader(String fileName) {
@@ -739,7 +807,7 @@ class B24hours {
                 inChar = (char) in;
                 if (in != -1)
                     response.append(in);
-                    System.out.println(">>");
+                System.out.println(">>");
             } while ((in != -1) & (inChar != '\n'));
             bin.close();
             System.out.print(">" + bin);

@@ -488,6 +488,9 @@ class B24hours {
                 case 20:
                     section20(myObj);
                     break;
+                case 21:
+                    section21(myObj);
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -500,7 +503,7 @@ class B24hours {
                 + " 9:\tArray and list.\n" + "10:\tObject oriented programming.\n" + "11.\tDescription object.\n"
                 + "12.\tVector test.\n" + "13.\tApplication GUI.\n" + "14.\tApplication layout.\n"
                 + "15.\tUI user input listener.\n" + "16.\tCreate complex UI.\n" + "18.\tException handling.\n"
-                + "19.\tMulti-Threading program.\n" + "20.\tFile IO.");
+                + "19.\tMulti-Threading program.\n" + "20.\tFile IO.\n" +"21.\tXML file IO.");
     }
 
     public static void section5() {
@@ -817,4 +820,52 @@ class B24hours {
             return;
         }
     }
+
+    public static void section21(Scanner myObj) {
+        System.out.println("section 21: XML File IO.");
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
+                + "1.\t Create a XML file. \n" 
+                + "2.\t System in.\n"
+                + "3.\t Load file property.\n" 
+                + "4.\t Convert HTML file's Tag (U->L or L-U).\n");
+        int choice = myObj.nextInt();
+        System.out.println("Input: " + choice);
+
+        switch (choice) {
+            case 0:
+                break;
+            case 1:
+                Properties prop = new Properties();
+                prop.setProperty("username", "YC");
+                prop.setProperty("browser", "Chrome");
+                prop.setProperty("showEmail", "no");
+                try {
+                    File propFile = new File("properties.xml");
+                    FileOutputStream pStream = new FileOutputStream(propFile);
+                    Date now = new Date();
+                    prop.storeToXML(pStream, "Create on " + now);
+                } catch (IOException exception) {
+                    System.out.println("Error: " + exception.toString());
+                }
+                break;
+            case 2:
+                readConsole();
+                break;
+            case 3:
+                loadPt("CleanTag.properties");
+                break;
+            case 4:
+                TagCleaner cleanner = new TagCleaner("CleanTagtest.html");
+                break;
+
+            default:
+                System.out.println("The input" + choice + "is not valid.");
+        }
+        
+    }
+
+
+
+
+
 }

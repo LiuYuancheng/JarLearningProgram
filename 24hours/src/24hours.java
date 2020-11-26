@@ -5,6 +5,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.net.*;
 import java.io.*;
+import nu.xom.*; // Download the xom-1.3.3.jar and follow the below link to import:
+// https://stackoverflow.com/questions/50232557/visual-studio-code-java-extension-howto-add-jar-to-classpath
 
 //-----------------------------------------------------------------------------
 class Modem {
@@ -417,7 +419,7 @@ class B24hours {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-20), 0 for stop:");
+            System.out.println("Enter your choice(0-21), 0 for stop:");
             // choice = myObj.nextInt();
             String choiceStr = myObj.nextLine();
             // System.out.println("Input: " + choice);
@@ -825,8 +827,8 @@ class B24hours {
         System.out.println("section 21: XML File IO.");
         System.out.println("Enter your choice(0-3), 0 for stop:\n" 
                 + "1.\t Create a XML file. \n" 
-                + "2.\t System in.\n"
-                + "3.\t Load file property.\n" 
+                + "2.\t Read the XML file.\n"
+                + "3.\t Read the Rss url.\n" 
                 + "4.\t Convert HTML file's Tag (U->L or L-U).\n");
         int choice = myObj.nextInt();
         System.out.println("Input: " + choice);
@@ -849,10 +851,10 @@ class B24hours {
                 }
                 break;
             case 2:
-                readConsole();
+                readXml();
                 break;
             case 3:
-                loadPt("CleanTag.properties");
+                readRss();
                 break;
             case 4:
                 TagCleaner cleanner = new TagCleaner("CleanTagtest.html");
@@ -864,8 +866,83 @@ class B24hours {
         
     }
 
+    public static void readXml() {
+        try {
+            String cmt = "";
+            String username = "";
+            String browser = "";
+            String showE = "";
+            File proFile = new File("properties.xml");
+            Builder builder = new Builder();
+            Document doc = builder.build(proFile);
+            Element root = doc.getRootElement();
 
+            cmt = root.getFirstChildElement("comment").getValue();
+            Elements entries = root.getChildElements("entry");
+            for (int crt = 0; crt < entries.size(); crt++) {
+                Element entry = entries.get(crt);
+                Attribute key = entry.getAttribute("key");
+                String val = key.getValue();
+                if (val.equals("username")) {
+                    username = entry.getValue();
+                } else if (val.equals("browser")) {
+                    browser = entry.getValue();
+                } else if (val.equals("showEmail")) {
+                    showE = entry.getValue();
+                }
+            }
 
+            System.out.println(" \n Properitys: \n");
+            System.out.println("Comment: \t" + cmt);
+            System.out.println("username: \t" + username);
+            System.out.println("browser: \t" + browser);
+            System.out.println("showEmail: \t" + showE);
 
+        } catch (Exception exception) {
+            System.out.println("Error : " + exception.toString());
+        }
+    }
 
+    public static void readRss() {
+        String [] title = new String[15];
+        String [] link = new String[15];
+        String rssUrl = "https://rss.csmonitor.com/feeds/world";
+
+        int count =0;
+        try{
+            Builder builder = new Builder();
+            Document doc = builder.build(rssUrl);
+            Element root = doc.getRootElement();
+            
+            Element channel = root.getFirstChildElement("channel");
+            if(channel != null){
+                System.out.println("Start");
+                Elements items= channel.getChildElements("item");
+                for (int crt = 0; crt < items.size(); crt++) {
+                    if(count > 14){break;}
+                    Element entry = items.get(crt);
+                    Element titleE = entry.getFirstChildElement("title");
+                    Element linkE = entry.getFirstChildElement("link");
+                    title[crt] = titleE.getValue();
+                    link[crt] = linkE.getValue();
+                    count ++;
+                    }
+                System.out.println("mid");
+                // list items: 
+                for(int i=0; i< 15; i++){
+                    if(title[i]!=null){
+                        System.out.println(title[i]);
+                        System.out.println(link[i]);
+                    }
+                } 
+                System.out.println("Finished"); 
+                }
+        }catch (ParsingException exception) {
+            System.out.println("Error : " + exception.toString());
+        }catch (IOException exception2){
+            System.out.println("Error : " + exception2.toString());
+        }catch(Exception exception3){
+            System.out.println("Error : " + exception3.toString());
+        }
+    }
 }

@@ -37,33 +37,33 @@ java B24hours
 
 Enter the selection: 
 
-| Input number | Test case detail             |
-| ------------ | ---------------------------- |
-| 00           | Stop and terminate program.  |
-| 01           | Show title messages.         |
-| 02           |                              |
-| 03           |                              |
-| 04           |                              |
-| 05           | Parameters and functions.    |
-| 06           | String and characters.       |
-| 07           | Program control flow.        |
-| 08           | Looping.                     |
-| 09           | Array and list.              |
-| 10           | Object oriented programming. |
-| 11           | Description object.          |
-| 12           | Vector test.                 |
-| 13           | Application GUI.             |
-| 14           | Application layout.          |
-| 15           | UI user input listener.      |
-| 16           | Create complex UI            |
-| 17           |                              |
-| 18           | Exception handling.          |
-| 19           | Multi-Threading program.     |
-| 20           | File IO.                     |
-| 21           |                              |
-| 22           |                              |
-| 23           |                              |
-| 24           |                              |
+| Input number | Test case detail              |
+| ------------ | ----------------------------- |
+| 00           | Stop and terminate program.   |
+| 01           | Show title messages.          |
+| 02           |                               |
+| 03           |                               |
+| 04           |                               |
+| 05           | Parameters and functions.     |
+| 06           | String and characters.        |
+| 07           | Program control flow.         |
+| 08           | Looping.                      |
+| 09           | Array and list.               |
+| 10           | Object oriented programming.  |
+| 11           | Description object.           |
+| 12           | Vector test.                  |
+| 13           | Application GUI.              |
+| 14           | Application layout.           |
+| 15           | UI user input listener.       |
+| 16           | Create complex UI             |
+| 17           |                               |
+| 18           | Exception handling.           |
+| 19           | Multi-Threading program.      |
+| 20           | File IO.                      |
+| 21           | XML file IO                   |
+| 22           | Use different font and color. |
+| 23           |                               |
+| 24           |                               |
 
 
 

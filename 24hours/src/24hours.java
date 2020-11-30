@@ -38,6 +38,7 @@ class DlsModen extends Modem {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class myObj {
 
@@ -53,6 +54,7 @@ class myObj {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class StringLister {
     String[] names = { "Spanky", "Alfa", "Buckwheat" };
@@ -69,6 +71,7 @@ class StringLister {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class Point3D extends Point {
     public int z;
@@ -89,6 +92,7 @@ class Point3D extends Point {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class PlaybackFm extends JFrame {
     public PlaybackFm() {
@@ -107,6 +111,7 @@ class PlaybackFm extends JFrame {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class ClockFrm extends JFrame {
     public ClockFrm() {
@@ -121,6 +126,7 @@ class ClockFrm extends JFrame {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class KeyView extends JFrame implements KeyListener {
     JTextField keyTxt = new JTextField(80);
@@ -152,6 +158,7 @@ class KeyView extends JFrame implements KeyListener {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class WriteMail extends JFrame {
 
@@ -200,6 +207,7 @@ class WriteMail extends JFrame {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class ColorPanel extends JPanel {
     Color background;
@@ -295,6 +303,7 @@ class ColorSlider extends JFrame implements ChangeListener {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class Tool extends JFrame {
     public Tool() {
@@ -331,6 +340,7 @@ class Tool extends JFrame {
 
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class HomePage {
     String owner;
@@ -348,6 +358,7 @@ class HomePage {
     }
 }
 
+//-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 class TagCleaner {
     public TagCleaner(String filename) {
@@ -493,21 +504,27 @@ class B24hours {
                 case 21:
                     section21(myObj);
                     break;
+                case 22:
+                    section22(myObj);
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
         }
     }
 
+    //-----------------------------------------------------------------------------
     public static void section1() {
         System.out.println(" 0:\tTerminate program. \n" + " 1:\tShow the input list. \n" + " 5:\tParameter define. \n"
                 + " 6:\tString and characters.\n" + " 7:\tProgram control flow.\n" + " 8:\tLooping.\n"
                 + " 9:\tArray and list.\n" + "10:\tObject oriented programming.\n" + "11.\tDescription object.\n"
                 + "12.\tVector test.\n" + "13.\tApplication GUI.\n" + "14.\tApplication layout.\n"
                 + "15.\tUI user input listener.\n" + "16.\tCreate complex UI.\n" + "18.\tException handling.\n"
-                + "19.\tMulti-Threading program.\n" + "20.\tFile IO.\n" +"21.\tXML file IO.");
+                + "19.\tMulti-Threading program.\n" + "20.\tFile IO.\n" +"21.\tXML file IO. " 
+                + "22.\tUse different font and color.");
     }
 
+    //-----------------------------------------------------------------------------
     public static void section5() {
         System.out.println("section 5: Parameter define.");
         int x = 10;
@@ -518,6 +535,7 @@ class B24hours {
         System.out.println("answer = ++x*10, answer = " + answer);
     }
 
+    //-----------------------------------------------------------------------------
     public static void section6() {
         System.out.println("section 6: String and characters.");
         System.out.println("Java special chars: \', \", \\, \t, \b, \r, \f, \n ");
@@ -535,6 +553,7 @@ class B24hours {
                 + role2 + "\t" + actor2 + "\n");
     }
 
+    //-----------------------------------------------------------------------------
     public static void section7(Scanner myObj) {
         System.out.println("section 7: Program control flow.");
         System.out.println("Time Zone: ");
@@ -562,6 +581,7 @@ class B24hours {
         System.out.println(" numOfEnemise: \t" + numOfEnemise);
     }
 
+    //-----------------------------------------------------------------------------
     public static void section8() {
         System.out.println("section 8: Looping.");
         int count = 10;
@@ -582,6 +602,7 @@ class B24hours {
         System.out.println("The counter added " + count + "times");
     }
 
+    //-----------------------------------------------------------------------------
     public static void section9() {
         System.out.println("section 9: Array and list.");
         String str = "This is a String";
@@ -593,6 +614,7 @@ class B24hours {
         System.out.println("New String:" + new String(charList));
     }
 
+    //-----------------------------------------------------------------------------
     public static void section10() {
         System.out.println("section 10: Object oriented programming.");
         String count = "25";
@@ -612,6 +634,7 @@ class B24hours {
         System.out.println("Created " + Modem.modCount + " modens.");
     }
 
+    //-----------------------------------------------------------------------------
     public static void section11() {
         System.out.println("section 11: Description object.");
         int objnum = 5;
@@ -622,6 +645,7 @@ class B24hours {
         System.out.println("Created " + myObj.getObjCount() + " object.");
     }
 
+    //-----------------------------------------------------------------------------
     public static void section12() {
         System.out.println("section 12: Vector test.");
         String[] names = { "name1", "name2", "name3" };
@@ -641,6 +665,7 @@ class B24hours {
         System.out.println("pt2:(" + pt2.x + "," + pt2.y + "," + pt2.z + ")");
     }
 
+    //-----------------------------------------------------------------------------
     public static void section13(Scanner myObj) {
         System.out.println("section 13: Application GUI.");
         System.out.println("Enter your choice(0-3), 0 for stop:\n" + "1.\t Playback UI. \n" + "2.\t Clock UI.");
@@ -660,11 +685,13 @@ class B24hours {
         }
     }
 
+    //-----------------------------------------------------------------------------
     public static void section14() {
         System.out.println("section 14: Application layout.");
         LottoMadnes frame = new LottoMadnes();
     }
 
+    //-----------------------------------------------------------------------------
     public static void section15(Scanner myObj) {
         System.out.println("section 15: UI user input listener.");
 
@@ -687,6 +714,7 @@ class B24hours {
         }
     }
 
+    //-----------------------------------------------------------------------------
     public static void section16(Scanner myObj) {
         // Create complex UI
         System.out.println("section 16: Create complex UI.");
@@ -713,6 +741,7 @@ class B24hours {
         }
     }
 
+    //-----------------------------------------------------------------------------
     public static void section18() {
         // Exception handling.
         System.out.println("section 18: Exception handling.");
@@ -732,11 +761,13 @@ class B24hours {
         }
     }
 
+    //-----------------------------------------------------------------------------
     public static void section19() {
         System.out.println("section 19: Multi-Threading program.");
         FindPrimes fp = new FindPrimes();
     }
 
+    //-----------------------------------------------------------------------------
     public static void section20(Scanner myObj) {
         System.out.println("section 20: File IO.");
         System.out.println("Enter your choice(0-3), 0 for stop:\n" + "1.\t MP3 input. \n" + "2.\t System in.\n"
@@ -823,13 +854,13 @@ class B24hours {
         }
     }
 
+    //-----------------------------------------------------------------------------
     public static void section21(Scanner myObj) {
         System.out.println("section 21: XML File IO.");
         System.out.println("Enter your choice(0-3), 0 for stop:\n" 
                 + "1.\t Create a XML file. \n" 
                 + "2.\t Read the XML file.\n"
-                + "3.\t Read the Rss url.\n" 
-                + "4.\t Convert HTML file's Tag (U->L or L-U).\n");
+                + "3.\t Read the Rss url.\n" );
         int choice = myObj.nextInt();
         System.out.println("Input: " + choice);
 
@@ -856,10 +887,6 @@ class B24hours {
             case 3:
                 readRss();
                 break;
-            case 4:
-                TagCleaner cleanner = new TagCleaner("CleanTagtest.html");
-                break;
-
             default:
                 System.out.println("The input" + choice + "is not valid.");
         }
@@ -944,5 +971,10 @@ class B24hours {
         }catch(Exception exception3){
             System.out.println("Error : " + exception3.toString());
         }
+    }
+
+    //-----------------------------------------------------------------------------
+    public static void section22(Scanner myObj){
+        UIframe frame = new UIframe(0);
     }
 }

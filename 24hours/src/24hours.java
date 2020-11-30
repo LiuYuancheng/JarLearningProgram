@@ -430,7 +430,7 @@ class B24hours {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-21), 0 for stop:");
+            System.out.println("Enter your choice(0-22), 0 for stop:");
             // choice = myObj.nextInt();
             String choiceStr = myObj.nextLine();
             // System.out.println("Input: " + choice);
@@ -975,6 +975,12 @@ class B24hours {
 
     //-----------------------------------------------------------------------------
     public static void section22(Scanner myObj){
-        UIframe frame = new UIframe(0);
+        System.out.println("section 21: Font and Color.");
+        System.out.println("Enter your choice(0-3), 0 for stop:\n" 
+                + "1.\t Create the image viewer. \n" 
+                + "2.\t Warning window frame.\n" );
+        int choice = myObj.nextInt();
+        System.out.println("Input: " + choice);
+        UIframe frame = new UIframe(choice);
     }
 }

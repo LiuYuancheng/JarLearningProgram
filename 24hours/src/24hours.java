@@ -430,7 +430,7 @@ class B24hours {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-22), 0 for stop:");
+            System.out.println("Enter your choice(0-23), 0 for stop:");
             // choice = myObj.nextInt();
             String choiceStr = myObj.nextLine();
             // System.out.println("Input: " + choice);
@@ -506,6 +506,9 @@ class B24hours {
                     break;
                 case 22:
                     section22(myObj);
+                    break;
+                case 23: 
+                    section23(myObj);
                     break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
@@ -975,7 +978,7 @@ class B24hours {
 
     //-----------------------------------------------------------------------------
     public static void section22(Scanner myObj){
-        System.out.println("section 21: Font and Color.");
+        System.out.println("section 22: Font and Color.");
         System.out.println("Enter your choice(0-3), 0 for stop:\n" 
                 + "1.\t Create the image viewer. \n" 
                 + "2.\t Warning window frame.\n" );
@@ -983,4 +986,17 @@ class B24hours {
         System.out.println("Input: " + choice);
         UIframe frame = new UIframe(choice);
     }
+    //-----------------------------------------------------------------------------
+    public static void section23(Scanner myObj){
+        System.out.println("section 23: Use graphic.");
+        System.out.println("Enter your choice(3-5), 0 for stop:\n" 
+                + "3.\t Create the a sign. \n" 
+                + "2.\t Warning window frame.\n" );
+        int choice = myObj.nextInt();
+        System.out.println("Input: " + choice);
+        UIframe frame = new UIframe(choice);
+    }
+
+
+
 }

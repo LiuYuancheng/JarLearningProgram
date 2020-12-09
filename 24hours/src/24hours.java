@@ -523,8 +523,8 @@ class B24hours {
                 + " 9:\tArray and list.\n" + "10:\tObject oriented programming.\n" + "11.\tDescription object.\n"
                 + "12.\tVector test.\n" + "13.\tApplication GUI.\n" + "14.\tApplication layout.\n"
                 + "15.\tUI user input listener.\n" + "16.\tCreate complex UI.\n" + "18.\tException handling.\n"
-                + "19.\tMulti-Threading program.\n" + "20.\tFile IO.\n" +"21.\tXML file IO. " 
-                + "22.\tUse different font and color.");
+                + "19.\tMulti-Threading program.\n" + "20.\tFile IO.\n" +"21.\tXML file IO.\n" 
+                + "22.\tUse different font and color.\n" + "23.\t Use Graphic.\n");
     }
 
     //-----------------------------------------------------------------------------
@@ -991,7 +991,7 @@ class B24hours {
         System.out.println("section 23: Use graphic.");
         System.out.println("Enter your choice(3-5), 0 for stop:\n" 
                 + "3.\t Create the a sign. \n" 
-                + "2.\t Warning window frame.\n" );
+                + "4.\t Draw a PIE chart.\n" );
         int choice = myObj.nextInt();
         System.out.println("Input: " + choice);
         UIframe frame = new UIframe(choice);

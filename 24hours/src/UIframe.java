@@ -17,6 +17,10 @@ public class UIframe {
                 break;
             case 3:
                 Sign sign = new Sign();
+                break;
+            case 4:
+                PieApp pie = new PieApp();
+                break;
             default:
                 System.out.println("The input" + choice + "is not valid.");
         }
@@ -217,5 +221,93 @@ class SignPnl extends JPanel {
         sign3.lineTo(81F, 107F);
         sign3.closePath();
         comp2D.fill(sign3);
+    }
+}
+//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+class PieApp extends JFrame {
+    Color p1 = new Color(0xCC, 0xCC, 0x99);
+    Color p2 = new Color(0xCC, 0x66, 0xFF);
+    Color p3 = new Color(0x66, 0x66, 0x99);
+    Color p4 = new Color(0x66, 0x99, 0x66);
+    Color p5 = new Color(0x33, 0xFF, 0xFF);
+    Color p6 = new Color(0x33, 0xCC, 0xCC);
+    Color p7 = new Color(0x66, 0x33, 0x99);
+    Color p8 = new Color(0x99, 0x66, 0x33);
+    Color p9 = new Color(0x66, 0x66, 0x66);
+    Color p10 = new Color(0x92, 0x16, 0x33);
+
+    public PieApp() {
+        super("Pie chart frame.");
+        setSize(410, 435);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        PiePnl pie = new PiePnl(10);
+        pie.addSlide(p1, 1306);
+        pie.addSlide(p2, 1080);
+        pie.addSlide(p3, 242);
+        pie.addSlide(p4, 186);
+        pie.addSlide(p5, 162);
+        pie.addSlide(p6, 144);
+        pie.addSlide(p7, 143);
+        pie.addSlide(p8, 129);
+        pie.addSlide(p9, 127);
+        pie.addSlide(p10, 500);
+        add(pie);
+        setVisible(true);
+    }
+}
+
+class PiePnl extends JPanel {
+    private PieSlide[] slide;
+    private int crt = 0;
+    private float totalSz = 0F;
+    private Color bg;
+
+    public PiePnl(int slideCount) {
+        slide = new PieSlide[slideCount];
+        bg = getBackground();
+    }
+
+    public void addSlide(Color pc, float ps) {
+        if (crt <= slide.length) {
+            slide[crt] = new PieSlide(pc, ps);
+            totalSz += ps;
+            crt++;
+        }
+    }
+
+    public void paintComponent(Graphics comp) {
+        super.paintComponent(comp);
+        Graphics2D comp2D = (Graphics2D) comp;
+        int w = getSize().width - 10;
+        int h = getSize().height - 10;
+        int x = 5;
+        int y = 5;
+        if(w<5) x = w; 
+        if(h<5) y = h;
+        comp2D.setColor(bg);
+        comp2D.fillRect(0, 0, getSize().width, getSize().height);
+        comp2D.setColor(Color.lightGray);
+        Ellipse2D.Float pie = new Ellipse2D.Float(x, y, w, h);
+        comp2D.fill(pie);
+        float start = 0;
+        for (int i =0; i<slide.length;i++){
+            float extent = slide[i].size*360F/totalSz;
+            comp2D.setColor(slide[i].color);
+            Arc2D.Float drawSlice = new Arc2D.Float(x, y , w, h, start, extent, Arc2D.Float.PIE);
+            start += extent;
+            comp2D.fill(drawSlice);
+        }
+    }
+}
+
+class PieSlide {
+    Color color = Color.lightGray;
+    float size = 0F;
+
+    PieSlide(Color pc, float ps) {
+        color = pc;
+        size = ps;
     }
 }

@@ -1,6 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.*;
+import java.util.*;
 
 //-----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
@@ -20,6 +21,9 @@ public class UIframe {
                 break;
             case 4:
                 PieApp pie = new PieApp();
+                break;
+            case 5: 
+                Bounce animation = new Bounce();
                 break;
             default:
                 System.out.println("The input" + choice + "is not valid.");
@@ -311,3 +315,70 @@ class PieSlide {
         size = ps;
     }
 }
+//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+class Bounce extends JFrame{
+    public Bounce(){
+        super("Tennis");
+        setSize(640, 480);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        BouncePnl pnl = new BouncePnl();
+        add(pnl);
+        setVisible(true);
+    }
+}
+
+class BouncePnl extends JPanel implements Runnable{
+    Image ball, court;
+    float crt = 0F;
+    Thread runner;
+    int xPos = 10;
+    int xMv = 1;
+    int yPos = -1;
+    int ballh = 228;
+    int ballw = 218;
+    int height;
+
+    public BouncePnl() {
+        super();
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        ball = kit.getImage("img/1s.png");
+        court = kit.getImage("img/OT_PlatForm.jpg");
+        runner = new Thread(this);
+        runner.start();
+    }
+
+    public void paintComponent(Graphics comp) {
+        Graphics2D comp2D = (Graphics2D) comp;
+        height = getSize().height - ballh;
+        if (yPos == -1)
+            yPos = height - 20;
+        if ((court != null) && (ball != null)) {
+            comp2D.drawImage(court, 0, 0, this);
+            comp2D.drawImage(ball, (int) xPos, (int) yPos, this);
+        }
+    }
+
+    public void run() {
+        Thread thisThread = Thread.currentThread();
+        while (runner == thisThread) {
+            crt += (float) 0.1;
+            if (crt > 3)
+                crt = 0F;
+            xPos += xMv;
+            if (xPos > (getSize().width - ballw))
+                xMv *= -1;
+            if (xPos < 1)
+                xMv *= -1;
+            double bounce = Math.sin(crt) * height;
+            yPos = (int) (height - bounce);
+            repaint();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+}
+

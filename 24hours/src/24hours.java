@@ -430,7 +430,7 @@ class B24hours {
         int choice = 1;
         Scanner myObj = new Scanner(System.in);
         while (choice > 0) {
-            System.out.println("Enter your choice(0-23), 0 for stop:");
+            System.out.println("Enter your choice(0-24), 0 for stop:");
             // choice = myObj.nextInt();
             String choiceStr = myObj.nextLine();
             // System.out.println("Input: " + choice);
@@ -510,6 +510,9 @@ class B24hours {
                 case 23: 
                     section23(myObj);
                     break;
+                case 24:
+                    section24(myObj);
+                    break;
                 default:
                     System.out.println("The input" + choice + "is not valid.");
             }
@@ -524,7 +527,7 @@ class B24hours {
                 + "12.\tVector test.\n" + "13.\tApplication GUI.\n" + "14.\tApplication layout.\n"
                 + "15.\tUI user input listener.\n" + "16.\tCreate complex UI.\n" + "18.\tException handling.\n"
                 + "19.\tMulti-Threading program.\n" + "20.\tFile IO.\n" +"21.\tXML file IO.\n" 
-                + "22.\tUse different font and color.\n" + "23.\t Use Graphic.\n");
+                + "22.\tUse different font and color.\n" + "23.\t Use Graphic.\n" +"24/\t Create animation.\n");
     }
 
     //-----------------------------------------------------------------------------
@@ -996,7 +999,10 @@ class B24hours {
         System.out.println("Input: " + choice);
         UIframe frame = new UIframe(choice);
     }
-
-
+    //-----------------------------------------------------------------------------
+    public static void section24(Scanner myObj){
+        System.out.println("section 23: Use graphic.");
+        UIframe frame = new UIframe(5);
+    }
 
 }

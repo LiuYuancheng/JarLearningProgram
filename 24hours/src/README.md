@@ -27,12 +27,17 @@ This project is used test all the Java program in the Java self learning book < 
 
 ```
 javac 24hours.java
+or
+javac -cp ".;ws-commons-util-1.0.2.jar;xmlrpc-client-3.1.3.jar;xmlrpc-common-3.1.3.jar;xmlrpc-helma-1.0.jar;xmlrpc-server-3.1.3.jar;xom-1.3.3.jar;commons-logging-1.1.jar" LottoClient.java
+
 ```
 
 ###### Execute the program: 
 
 ```
 java B24hours
+or 
+java -cp ".;ws-commons-util-1.0.2.jar;xerces-2.9.0.jar;xmlrpc-client-3.1.3.jar;xmlrpc-common-3.1.3.jar;xmlrpc-helma-1.0.jar;xmlrpc-server-3.1.3.jar;xom-1.3.3.jar;commons-logging-1.1.jar" LottoClient 725 10 8 1 0
 ```
 
 Enter the selection: 

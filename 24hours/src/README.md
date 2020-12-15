@@ -12,12 +12,16 @@ This project is used test all the Java program in the Java self learning book < 
 
 ###### Program Files List :
 
-| Program File   | Execution Env | Description                                                  |
-| :------------- | ------------- | ------------------------------------------------------------ |
-| 24hours.java   | Win/Linux     | The main program to implement and test all the functions.    |
-| RootApplet.hpp | Win/Linux     | The program to test the Java Applet. Even Applet is not support by most of the current browser. |
-|                |               |                                                              |
-|                |               |                                                              |
+| Program File      | Execution Env | Description                                                  |
+| :---------------- | ------------- | ------------------------------------------------------------ |
+| 24hours.java      | Win/Linux     | The main program to implement and test all the functions.    |
+| RootApplet.hpp    | Win/Linux     | The program to test the Java Applet. Even Applet is not support by most of the current browser. |
+| UIframe.java      | Win/Linux     | The User interface for Image player, danger alert box, compress gas sign, Pie chart display and Animation bounce display window. |
+| LottoServer.java  | Win/Linux     | XML-RPC server program.                                      |
+| LottoClient.java  | Win/Linux     | XML-RPC client program.                                      |
+| FindPrimes.java   | Win/Linux     | Program used to find a prime in a range.                     |
+| c24lockPnl.java   | Win/Linux     | Clock panel use to display the time.                         |
+| LottoCounter.java | Win/Linux     | XML-RPC lotto message sending program.                       |
 
 ------
 
@@ -67,10 +71,16 @@ Enter the selection:
 | 20           | File IO.                      |
 | 21           | XML file IO                   |
 | 22           | Use different font and color. |
-| 23           |                               |
-| 24           |                               |
+| 23           | Use Graphic.                  |
+| 24           | Create animation.             |
 
+Section 25: 
 
+Setup JDK
+
+```
+CLASSPATH = C:\Program Files\Java\jdk-15.0.1
+```
 
 
 
